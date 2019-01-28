@@ -9,7 +9,7 @@ using IndexCardsWebApp.Models;
 
 namespace IndexCardsWebApp.Services
 {
-    public class IndexCardService
+    public class IndexCardService : IIndexCardService
     {
 
         public List<IndexCard> GetAll()

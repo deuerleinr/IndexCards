@@ -13,7 +13,13 @@ namespace IndexCardsWebApp.Controllers
     [RoutePrefix("api/indexcards")]
     public class IndexCardController : ApiController
     {
-        readonly IndexCardService indexCardService = new IndexCardService();
+        readonly IIndexCardService indexCardService;
+
+        public IndexCardController(IIndexCardService indexCardService)
+        {
+            this.indexCardService = indexCardService;
+        }
+
 
         [HttpGet, Route]
         public List<IndexCard> GetAll()
