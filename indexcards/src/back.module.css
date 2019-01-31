@@ -1,0 +1,58 @@
+.root{
+    display:grid;
+    grid-template-columns: .2fr .6fr .2fr;
+    grid-template-rows: .16fr .84fr;
+    grid-template-areas:
+    "menuLeft menuCenter menuRight"
+    "contents contents contents"; 
+    height:300px;
+    width:500px;    
+    margin: 15px;
+    padding: 5px;     
+    border: solid black 2px;
+}
+
+.menuLeft{
+  grid-area: menuLeft;    
+}
+
+.menuCenter{
+  grid-area: menuCenter;   
+}
+
+.menuRight {
+    grid-area: menuRight;    
+}
+
+.contents {
+    grid-area: contents;
+    padding: 10px 5px 5px 5px;     
+}
+
+.btn {
+    display: block;
+    margin: 5px auto 0 auto;
+    height:40px;
+    width: 60px;
+    background-color:transparent;
+    border: solid 2px;
+    border-radius: 10%;   
+    font-size: 1.2em;
+}
+
+.pass {
+    border-color: green;
+    color: green;
+    width: 90px;
+}
+
+.fail {
+     border-color:red;
+     color: red;
+     width: 90px;
+}
+
+.btn:hover{
+    cursor:pointer;
+    background-color: rgba(128, 128, 128, 0.342);
+}

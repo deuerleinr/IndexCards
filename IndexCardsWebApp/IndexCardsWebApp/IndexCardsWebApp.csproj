@@ -114,6 +114,8 @@
     </Compile>
     <Compile Include="Models\IndexCard.cs" />
     <Compile Include="Models\IndexCardCreate.cs" />
+    <Compile Include="Models\IndexCardUpdate.cs" />
+    <Compile Include="Models\RandomCardResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IIndexCardService.cs" />
     <Compile Include="Services\IndexCardService.cs" />

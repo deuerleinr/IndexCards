@@ -33,6 +33,18 @@ namespace IndexCardsWebApp.Controllers
             return indexCardService.Create(model);
         }
 
+        [HttpPut, Route ("{Id:Int}")]
+        public void Update(IndexCardUpdate model)
+        {
+            indexCardService.Update(model);
+        }
+
+     
+        [HttpGet, Route("random")]
+        public RandomCardResponse IndexCardGetRandom()
+        {
+            return indexCardService.IndexCardGetRandom();
+        }
 
 
     }

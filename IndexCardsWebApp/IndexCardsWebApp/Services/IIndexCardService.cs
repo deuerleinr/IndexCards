@@ -7,5 +7,9 @@ namespace IndexCardsWebApp.Services
     {
         int Create(IndexCardCreate request);
         List<IndexCard> GetAll();
+        void Update (IndexCardUpdate request);
+        RandomCardResponse IndexCardGetRandom();
     }
 }
+
+ 
