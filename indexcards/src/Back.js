@@ -5,7 +5,7 @@ class Back extends React.Component {
   render() {
     return (
       <>
-        <div className={styles.root}>
+        <div className={[styles.root, styles.back].join(" ")}>
           <div className={styles.menuLeft}>
             <button
               className={[styles.btn, styles.fail].join(" ")}
@@ -17,7 +17,7 @@ class Back extends React.Component {
           <div className={styles.menuCenter}>
             <button
               className={[styles.btn, styles.edit].join(" ")}
-              onClick={this.props.handleEditBtn}
+              onClick={this.props.handleEditCardBtn}
             >
               <i className="fa fa-edit" />
             </button>
@@ -30,7 +30,10 @@ class Back extends React.Component {
               Pass <i className="fa fa-check" />
             </button>
           </div>
-          <div className={styles.contents}> {this.props.backContent}</div>
+          <div className={[styles.contents, styles.back].join(" ")}>
+            {" "}
+            {this.props.backContent}
+          </div>
         </div>
       </>
     );

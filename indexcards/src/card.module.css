@@ -6,10 +6,13 @@
     "menuLeft menuCenter menuRight"
     "contents contents contents"; 
     height:300px;
-    width:500px;    
-    /* margin: 15px; */
+    width:500px;         
     padding: 5px;     
     border: solid black 2px;
+    }
+
+.root.back{
+    background-image: url("http://www.mobilestan.biz/wp-content/uploads/4x6-note-card-template-4x6-index-card-template-asafonggecco-4x6-notecards-estelasso-cards.jpg")  
 }
 
 .menuLeft{
@@ -27,9 +30,17 @@
 .contents {
     grid-area: contents;
     padding: 10px 5px 5px 5px;     
+    font-size:1.2em;
+    font-weight: 500;
+    line-height: 1.6em;
+    background-color:transparent;  
 }
 
-.contents:hover{
+.contents.back{
+    overflow-y:auto;
+}
+
+.contents.front:hover{
     cursor: pointer;
 }
 
@@ -63,7 +74,7 @@
 
 .counter {
     color:#6c757d;
-    font-size: 1.2em;
+    font-size: 1.05em;
 }
 
 .dropdown {  
@@ -71,39 +82,17 @@
     margin: 0 5px 0 0;    
 } 
 
-.createEditCardHeader {
-    width:500px;
-    height: 50px;
-    border: solid black 1px;
-    padding: 5px 10px 0 10px;
-}
-
-.createEditCard{
-    width: 500px; 
-    height:250px;      
-    border: solid black 1px;
-    margin: 0 0 0 0;
-}
-
-.createEditCardFooter {
-    width:500px;
-    height: 50px;
-    border: solid black 1px;
-    padding: 5px 10px 0 10px;
-}
-
-.btnModalClose {    
-    color: white;    
-    border: none;
-    width: 100%;     
-    height: 35px;
-    font-size: 4em;         
-}
+ 
 
 .btnSkip {
     color:#6c757d;
-    margin-top: 0;
+    margin-top: 2px;
     height: 38px;
     width:auto;
     font-size: 1em;
+}
+
+.confirmModalText {
+    font-size:1.4em;
+    color:red;
 }

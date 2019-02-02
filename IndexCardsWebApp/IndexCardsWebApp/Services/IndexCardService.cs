@@ -79,7 +79,35 @@ namespace IndexCardsWebApp.Services
             };
         }
 
-        public RandomCardResponse IndexCardGetRandom ()
+        public IndexCard GetById (int id)
+        {
+            using (var con = GetConnection())
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "IndexCard_GetById";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+                IndexCard indexCard = new IndexCard();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        return null;
+                    }
+                    indexCard.Id = (int)reader["Id"];
+                    indexCard.Front = reader["front"] as String;
+                    indexCard.Back = reader["back"] as String;
+                    indexCard.CardStatus = reader["cardStatus"] as String;
+                    indexCard.SortOrder = (int)reader["sortOrder"];
+                    indexCard.DateCreated = (DateTime)reader["dateCreated"];
+                    indexCard.DateModified = (DateTime)reader["dateModified"];
+                }
+                return indexCard;
+            }
+        }
+
+
+        public RandomCardResponse GetRandom ()
         {
             using (var con = GetConnection())
             {
@@ -108,6 +136,28 @@ namespace IndexCardsWebApp.Services
         }
 
 
+        public void ResetCards()
+        {
+            using (var con = GetConnection())
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "indexCard_Reset";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var con = GetConnection())
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "IndexCard_Delete";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.ExecuteNonQuery();
+            }
+        }
 
         //helper method to create and open a database connection
         SqlConnection GetConnection()

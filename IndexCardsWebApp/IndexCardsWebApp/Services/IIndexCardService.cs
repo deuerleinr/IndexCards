@@ -8,7 +8,10 @@ namespace IndexCardsWebApp.Services
         int Create(IndexCardCreate request);
         List<IndexCard> GetAll();
         void Update (IndexCardUpdate request);
-        RandomCardResponse IndexCardGetRandom();
+        RandomCardResponse GetRandom();
+        IndexCard GetById(int id);
+        void ResetCards();
+        void Delete(int id);
     }
 }
 
