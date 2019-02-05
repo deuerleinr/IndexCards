@@ -39,6 +39,12 @@ namespace IndexCardsWebApp.Controllers
             indexCardService.Update(model);
         }
 
+        [HttpPut, Route("pass/{Id:Int}")]
+        public void Pass (IndexCardUpdate model)
+        {
+            indexCardService.Pass(model);
+        }
+
 
         [HttpGet, Route("random")]
         public RandomCardResponse GetRandom()

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import {
   indexCard_getRandom,
-  indexCard_update_async,
+  indexCard_pass_async,
   indexCard_ResetCards,
   indexCard_Delete
 } from "./server";
@@ -26,19 +26,19 @@ class Home extends Component {
 
   async loadNewRandomCard() {
     const currentCard = await indexCard_getRandom();
-    console.log(currentCard);
     if (!currentCard) {
-      const emptyCardSet = {
+      const errorCardSet = {
         id: -1,
         front: "Databse error",
         totalTableRows: 0,
         totalStatusRows: 0
       };
-      this.setState({ currentCard: emptyCardSet }, () => {
+      this.setState({ currentCard: errorCardSet }, () => {
         console.log(this.state.currentCard.front);
       });
     } else {
       this.setState({ currentCard });
+      this.setState({ side: "front" });
     }
   }
 
@@ -57,18 +57,14 @@ class Home extends Component {
       cardStatus: "passed",
       sortOrder: c.sortOrder
     };
-    const resp = await indexCard_update_async(cardId, req);
-    console.log(resp);
-    this.setState({ side: "front" }, () => {
-      this.loadNewRandomCard();
-    });
+    await indexCard_pass_async(cardId, req);
+    this.loadNewRandomCard();
   }
 
-  handleFailBtn = cardId => {
-    this.setState({ side: "front" }, () => {
-      this.loadNewRandomCard();
-    });
-  };
+  async handleFailBtn() {
+    await this.loadNewRandomCard();
+    this.setState({ side: "front" });
+  }
 
   handleNewCardBtn = () => {
     this.props.history.push("./edit");
@@ -83,7 +79,6 @@ class Home extends Component {
   async handleDeleteCardBtn(id) {
     if (this.state.currentCard.id !== -1) {
       const resp = await indexCard_Delete(id);
-      console.log(resp);
       if (resp.status >= 200 && resp.status <= 299) {
         NotificationManager.success("Card Successfully Deleted");
       } else {
@@ -95,9 +90,17 @@ class Home extends Component {
 
   async handleResetCardsBtn() {
     const resp = await indexCard_ResetCards();
-    console.log(resp);
+    if (resp.status >= 200 && resp.status <= 299) {
+      NotificationManager.success("Cards Reset");
+    } else {
+      NotificationManager.error("Database Insert Error");
+    }
     this.loadNewRandomCard();
   }
+
+  handleLoginBtn = () => {
+    alert("LOGIN STUFF");
+  };
 
   render() {
     const { currentCard, side } = this.state;
@@ -107,7 +110,7 @@ class Home extends Component {
         <div className={styles.cardContainer}>
           {side === "back" ? (
             <Back
-              backContent={currentCard.back}
+              back={currentCard.back}
               handlePassBtn={() => this.handlePassBtn(currentCard.id)}
               handleFailBtn={() => this.handleFailBtn()}
               handleEditCardBtn={() => this.handleEditCardBtn(currentCard.id)}
@@ -115,9 +118,7 @@ class Home extends Component {
           ) : (
             <div>
               <Front
-                frontContent={currentCard.front}
-                tableCount={currentCard.totalTableRows}
-                remainCount={currentCard.totalStatusRows}
+                currentCard={currentCard}
                 handleFrontClick={() => this.handleCardClick()}
                 handleSkipBtn={() => this.loadNewRandomCard()}
                 handleNewCardBtn={() => this.handleNewCardBtn()}
@@ -126,6 +127,7 @@ class Home extends Component {
                 handleDeleteCardBtn={() =>
                   this.handleDeleteCardBtn(currentCard.id)
                 }
+                handleLoginBtn={() => this.handleLoginBtn()}
               />
             </div>
           )}

@@ -52,6 +52,8 @@ namespace IndexCardsWebApp.Services
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "IndexCard_Create";
+                //cmd.CommandText = "IndexCard_Create2"; 
+                //"2" is Sql stored proc which does not write to the db but still returns id, simulating success                
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Front", request.Front);
                 cmd.Parameters.AddWithValue("@Back", request.Back);
@@ -69,6 +71,8 @@ namespace IndexCardsWebApp.Services
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "IndexCard_Update";
+                //cmd.CommandText = "IndexCard_Update2";
+                //"2" is Sql stored proc which does not write to the db but still runs, simulating success 
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", request.Id);
                 cmd.Parameters.AddWithValue("@Front", request.Front);
@@ -78,6 +82,24 @@ namespace IndexCardsWebApp.Services
                 cmd.ExecuteNonQuery();
             };
         }
+
+        public void Pass (IndexCardUpdate request)         
+        {
+            using (var con = GetConnection())
+            {
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "IndexCard_Update";            
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", request.Id);
+                cmd.Parameters.AddWithValue("@Front", request.Front);
+                cmd.Parameters.AddWithValue("@Back", request.Back);
+                cmd.Parameters.AddWithValue("@CardStatus", request.CardStatus);
+                cmd.Parameters.AddWithValue("@SortOrder", request.SortOrder);
+                cmd.ExecuteNonQuery();
+            };
+        }
+
+
 
         public IndexCard GetById (int id)
         {
@@ -153,6 +175,8 @@ namespace IndexCardsWebApp.Services
             {
                 var cmd = con.CreateCommand();
                 cmd.CommandText = "IndexCard_Delete";
+                //cmd.CommandText = "IndexCard_Delete2"; 
+                //"2" is Sql stored proc which does not write to the db but still runs, simulating success                 
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.ExecuteNonQuery();

@@ -1,6 +1,6 @@
 .root{
     display:grid;
-    grid-template-columns: .2fr .6fr .2fr;
+    grid-template-columns: .3fr .4fr .3fr;
     grid-template-rows: .16fr .84fr;
     grid-template-areas:
     "menuLeft menuCenter menuRight"
@@ -9,18 +9,31 @@
     width:500px;         
     padding: 5px;     
     border: solid black 2px;
+    position: relative;
     }
 
-.root.back{
-    background-image: url("http://www.mobilestan.biz/wp-content/uploads/4x6-note-card-template-4x6-index-card-template-asafonggecco-4x6-notecards-estelasso-cards.jpg")  
+ 
+
+.root.back::after{
+    content:"";
+    background: url(./indexCard.jpg) ;
+    opacity: 0.25;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right:0;
+    position: absolute;
+    z-index: -1;
 }
 
+
+
 .menuLeft{
-  grid-area: menuLeft;    
+  grid-area: menuLeft; 
 }
 
 .menuCenter{
-  grid-area: menuCenter;   
+  grid-area: menuCenter; 
 }
 
 .menuRight {
@@ -45,54 +58,72 @@
 }
 
 .btn {
-    display: block;
-    margin: 5px auto 0 auto;
-    height:40px;
-    width: 60px;
+    height: 40px;    
     background-color:transparent;
     border: solid 2px;
-    border-radius: 10%;   
+    border-radius: 5px;
     font-size: 1.2em;
-}
-
-.pass {
-    border-color: green;
-    color: green;
-    width: 90px;
-}
-
-.fail {
-     border-color:red;
-     color: red;
-     width: 90px;
 }
 
 .btn:hover{
     cursor:pointer;
-    background-color: rgba(128, 128, 128, 0.342);
 }
 
-.counter {
+.btnDrawAgain {
     color:#6c757d;
+    width:140px;
+    display:block;
+    margin: 0 auto 0 auto;       
     font-size: 1.05em;
 }
 
-.dropdown {  
-    float:right; 
-    margin: 0 5px 0 0;    
-} 
-
- 
-
-.btnSkip {
-    color:#6c757d;
-    margin-top: 2px;
-    height: 38px;
-    width:auto;
-    font-size: 1em;
+.btnFail {
+     width: 140px;     
+     color:red;  
+     padding: 0 0 4px 0;   
 }
+
+.btnEdit {
+    width: 140px;
+    display:block;
+    margin: 0 auto 0 auto;
+    color: #6c757d;
+    padding: 0 0 4px 0;
+}
+
+.btnPass {
+    width: 140px;     
+    color: green;
+    float:right;    
+    padding: 0 0 4px 0;
+}
+
+.counter {
+    border: solid #6c757d 2px;
+    height: 40px;
+    width:140px;
+    padding: 6px 0 0 3px;
+    border-radius:5px;
+    color:black;
+    font-size: 1.05em;
+}
+
+.menuContainer {  
+    float:right; 
+    margin: 0 0 0 0;   
+}
+
+ .menu {
+    color:#6c757d !important;
+     background-color: transparent!important;
+     width: 140px !important;
+     border: solid #6c757d 2px !important;
+     font-size: 1.05em !important;
+ }
+
 
 .confirmModalText {
     font-size:1.4em;
-    color:red;
+    margin: 0 0 0 13px;
+    
 }

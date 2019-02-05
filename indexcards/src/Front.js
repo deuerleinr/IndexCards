@@ -29,28 +29,34 @@ class Front extends React.Component {
       modal: !this.state.modal
     });
   };
+
   confirm = () => {
     this.props.handleDeleteCardBtn();
     this.toggleConfirmModal();
   };
 
   render() {
-    const { tableCount, remainCount } = this.props;
+    const {
+      id,
+      totalTableRows,
+      totalStatusRows,
+      front
+    } = this.props.currentCard;
 
     return (
       <>
         <Modal isOpen={this.state.modal} toggle={this.toggleConfirmModal}>
           <ModalHeader toggle={this.toggleConfirmModal}>
-            &nbsp; {this.props.header}
+            &nbsp; DELETE
           </ModalHeader>
           <ModalBody>
             <span className={styles.confirmModalText}>
-              DELETE CURRENT CARD?
+              Are you sure you want to delete this card?
             </span>
           </ModalBody>
           <ModalFooter>
             <Button color="danger m-0" onClick={this.confirm}>
-              Confirm
+              Delete
             </Button>
             <Button color="primary" onClick={this.toggleConfirmModal}>
               Cancel
@@ -60,37 +66,46 @@ class Front extends React.Component {
         <div className={styles.root}>
           <div className={styles.menuLeft}>
             <div className={styles.counter}>
-              {tableCount - remainCount}
+              {totalTableRows - totalStatusRows}
               {"/"}
-              {tableCount}
+              {totalTableRows}
               {" passed"}
             </div>
           </div>
           <div className={styles.menuCenter}>
             <button
-              className={[styles.btn, styles.btnSkip].join(" ")}
+              className={[styles.btn, styles.btnDrawAgain].join(" ")}
               onClick={this.props.handleSkipBtn}
             >
-              DRAW AGAIN
+              Draw again
             </button>
           </div>
           <div className={styles.menuRight}>
             <Dropdown
-              className={styles.dropdown}
+              className={styles.menuContainer}
               isOpen={this.state.dropdownOpen}
               toggle={this.toggle}
             >
-              <DropdownToggle>
-                <i className="fas fa-bars" />
-              </DropdownToggle>
+              <DropdownToggle className={styles.menu}>Menu</DropdownToggle>
               <DropdownMenu right>
                 {/* <DropdownItem header>Header</DropdownItem> */}
-                <DropdownItem onClick={this.props.handleEditCardBtn}>
-                  Edit this card
-                </DropdownItem>
-                <DropdownItem onClick={this.toggleConfirmModal}>
-                  Delete this card
-                </DropdownItem>
+
+                {id === -1 ? (
+                  <>
+                    <DropdownItem disabled>Edit this card</DropdownItem>
+                    <DropdownItem disabled>Delete this card</DropdownItem>
+                  </>
+                ) : (
+                  <>
+                    <DropdownItem onClick={this.props.handleEditCardBtn}>
+                      Edit this card
+                    </DropdownItem>
+                    <DropdownItem onClick={this.toggleConfirmModal}>
+                      Delete this card
+                    </DropdownItem>
+                  </>
+                )}
+
                 <DropdownItem onClick={this.props.handleNewCardBtn}>
                   Create New Card
                 </DropdownItem>
@@ -98,6 +113,10 @@ class Front extends React.Component {
                 <DropdownItem onClick={this.props.handleResetCardsBtn}>
                   Reset cards
                 </DropdownItem>
+                {/* <DropdownItem divider />
+                <DropdownItem onClick={this.props.handleLoginBtn}>
+                  Login
+                </DropdownItem> */}
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -105,7 +124,7 @@ class Front extends React.Component {
             className={[styles.contents, styles.front].join(" ")}
             onClick={this.props.handleFrontClick}
           >
-            {this.props.frontContent}
+            <div dangerouslySetInnerHTML={{ __html: front }} />
           </div>
         </div>
       </>

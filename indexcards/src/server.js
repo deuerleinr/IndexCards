@@ -14,6 +14,11 @@ export async function indexCard_update_async(id, req) {
   return resp;
 }
 
+export async function indexCard_pass_async(id, req) {
+  const resp = await axios.put("api/indexcards/pass/" + id, req);
+  return resp;
+}
+
 export function indexCard_getRandom() {
   return axios.get("/api/indexcards/random").then(resp => resp.data);
 }

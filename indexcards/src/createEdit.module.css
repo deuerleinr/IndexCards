@@ -1,19 +1,11 @@
-.cardOuter {
+.createEditCardOuter {
     width: 500px;
-    height: 600px;
+    height: 550px;
     display:block;
     margin: 13px auto 0 auto;
-    border: solid black 1px;
+    border: solid black 1px; 
 }
 
-.createEditCard{
-    width: 100%;
-    height:250px;       
-    margin: 0 0 0 0;
-    padding: 10px;   
-    border-bottom: solid black 1px;
-    font-size: 1.2em;    
-}
 
  .createEditCardHeader {
     width:100%;
@@ -25,7 +17,26 @@
 .createEditCardFooter {
     width:100%x;
     height: 50px;     
-    padding: 5px 10px 0 10px;
+    padding: 5px 10px 0 10px;      
+   
+}
+
+.btnSubmitEdit{
+    height: 35px;
+    font-size: 4em;
+    width: 79%;
+    margin: 0 4px 0 0 ;
+}
+
+.btnSubmitCreate{
+    height:35px;
+    font-size: 4em;
+    width: 100%;    
+}
+
+.btnDelete {
+    height: 35px;
+    width:14%;
 }
 
 .btnModalClose {                
@@ -34,7 +45,13 @@
     font-size: 4em;         
 }
 
- textarea {     
-     width: 100%;
-     height: 100%;
- }
+.textEditorContainer {
+ overflow-y: hidden !important;
+}
+
+.reactQuill{  
+    height:225px;
+    border-bottom:solid black 1px;     
+    padding: 0 0 43px 0;
+    /* border:none !important; */
+}
